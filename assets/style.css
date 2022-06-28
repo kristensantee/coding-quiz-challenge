@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: gold;
+    text-align: center;
+    font-size: 50px;
+}
+#startButton {
+    font-size: 30px;
+    /* padding: 10px, 20px;
+    border: 2px, solid, black; */
+}
+#resetButton {
+    font-size: 15px;
+}
+#questionBox {
+    background-color: red;
+    width: 1000px;
+    text-align: center;
+}
+#flexContainer {
+    background-color: navy;
+    color: white;
+    display: grid;
+    flex-wrap: wrap;
+    width: 1000px;
+    justify-content: center;
+}
+.answers {
+    background-color: tan;
+    border: 2px, solid, tan;
+    width: 400px;
+    text-align: center;
+}
+#timeBox {
+    background-color: purple;
+    width: 200px;
+    text-align: center;
+    /* justify-content: center; */
+}
