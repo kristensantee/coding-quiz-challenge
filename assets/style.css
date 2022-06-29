@@ -21,6 +21,7 @@ header {
     background-color: red;
     width: 1000px;
     text-align: center;
+    height: 300px;
 }
 #flexContainer {
     background-color: navy;
@@ -32,8 +33,9 @@ header {
 }
 .answers {
     background-color: tan;
-    border: 2px, solid, tan;
+    border: 10px, solid, black;
     width: 400px;
+    height: 100px;
     text-align: center;
 }
 #timeBox {
@@ -41,4 +43,10 @@ header {
     width: 200px;
     text-align: center;
     /* justify-content: center; */
+}
+#winScore {
+    background-color: aqua;
+    font-size: 20px;
+    width: 200px;
+    text-align: center;
 }
