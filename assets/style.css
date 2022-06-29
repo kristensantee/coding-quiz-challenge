@@ -2,12 +2,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
-
+:root{
+    --primary: rgb(30, 82, 64);
+    --secondary: rgb(171, 74, 45);
+    --accent: lightskyblue;
+    --font: antiquewhite;
+}
+body {
+     width: 100vw;
+     background-color: var(--primary);
+}
 header {
-    background-color: gold;
     text-align: center;
     font-size: 50px;
+    color: var(--font);
+}
+main {
+    align-items: center;
+}
+.button {
+    background-color: var(--accent);
+    padding: 10px 30px;
+    font-size: 30px;
+    border-radius: 15px;
+    font-weight: bold;
 }
 #startButton {
     font-size: 30px;
@@ -15,38 +35,59 @@ header {
     border: 2px, solid, black; */
 }
 #resetButton {
-    font-size: 15px;
+    font-size: 20px;
 }
 #questionBox {
-    background-color: red;
-    width: 1000px;
+    background-color: var(--secondary);
     text-align: center;
     height: 300px;
+    margin: 20px;
+    border-radius: 15px;
+}
+h2 {
+    color: var(--font);
+    font-size: 36px;
+    justify-content: center;
+    text-align: center
 }
 #flexContainer {
-    background-color: navy;
+    background-color: var(--secondary);
     color: white;
-    display: grid;
+    display: flex;
     flex-wrap: wrap;
-    width: 1000px;
-    justify-content: center;
+    justify-content: space-around;
+    margin: 20px;
+    border-radius: 15px;
+    padding: 10px;
 }
 .answers {
-    background-color: tan;
-    border: 10px, solid, black;
-    width: 400px;
-    height: 100px;
+    width: 90vw;
+    margin: 10px 50px;
     text-align: center;
+}
+.answers button {
+    margin: 10px 70px;
+    padding: 12px 250px;
 }
 #timeBox {
-    background-color: purple;
-    width: 200px;
-    text-align: center;
-    /* justify-content: center; */
+    border: 2px solid var(--font);
+    margin: auto;
+    width: 800px;
+    padding: 30px;
+    border-radius: 15px;
 }
-#winScore {
-    background-color: aqua;
+span#timeLeft {
+    color: var(--font);
+    padding: 10px;
+    height: 100px;
+}
+#results {
+    background-color: var(--secondary);
     font-size: 20px;
     width: 200px;
+    height: 100px;
     text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 15px;
 }

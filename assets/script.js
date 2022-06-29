@@ -1,4 +1,5 @@
-    //TODO: Corresponding question one answer options display
+    //TODO: edgecase: user clicks start while game is running
+//TODO: Corresponding question one answer options display
 //TODO: When answered correctly, move on to next question
     //TODO: alert/push that answer was correct
     //TODO: Add a point to the scoreboard
@@ -8,12 +9,13 @@
 //TODO: When time is up or all questions answered, game is over, user enters initials
 //TODO: Option to try game again or clear high scores
 //TODO: Score & initials stored locally
-//TODO: Timer function counting down
 
 var startBtn = document.querySelector("#startButton");
-var timeLeftSpan = document.querySelector("#timeLeft")
-var winSpan = 0
-var isPlaying = false
+var resetBtn = document.querySelector("#resetButton")
+var timeLeftSpan = document.querySelector("#timeLeft");
+var timerCountdown = document.querySelector("#timeLeft");
+var winSpan = 0;
+var isPlaying = false;
 
 var questionsList = [
     {
@@ -73,9 +75,9 @@ var questionsList = [
             b: "Earth",
             c: "Mars",
             d: "Jupiter"
-        }
+        },
         correctAnswer: "b"
-    }
+    },
     {
         question: "Derived from the Latin word for 'cake,' what is the name of the organ pregant people develop during every pregnancy?",
         answers: {
@@ -83,22 +85,59 @@ var questionsList = [
             b: "Condyle",
             c: "Placenta",
             d: "Glabella"
-        }
+        },
         correctAnswer: "c"
-    }
+    },
 ];
 
 //TODO: Start game when Start button is clicked
-startBtn.addEventListener("click",function(){
-    //TODO: edgecase: user clicks start while game is running
-    if(isPlaying){
-        return;
-    }
-    // Display question one in questionBox
-    var question = questionList[Math.floor(Math.random()*words.length)]
-})
+startBtn.addEventListener("click", startGame)
 
-function runQuiz() {
-    var = questionOne
+function startGame(){
+    console.log("started");
+    nextQuestion();
+    countdown();
+}
+
+function nextQuestion(){
+
+}
+
+function selectAnswer(){
+
+}
+
+//TODO: Timer function counting down
+function countdown() {
+    console.log("timer going")
+    var timeLeft = 10;
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+            timerCountdown.textContent = timeLeft + ' seconds remaining';
+            timeLeft--;
+        } else if (timeLeft === 1) {
+            timerCountdown.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+        } else {
+            timerCountdown.textContent = "Time's up!";
+            clearInterval(timeInterval);
+            console.log("Game over!");
+            //TODO: move to function for displaying score
+        }
+    }, 1000);
+}
+
+function scoreTabulation() {
+
+}
+
+resetBtn.addEventListener("click", resetGame)
+
+function resetGame() {
+    console.log("reset")
+    // Needs to stop timer
+    var timeLeft = 10;
+    // Needs to clear scores
+
 }
 

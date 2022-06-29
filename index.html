@@ -10,26 +10,20 @@
 <body>
     <header>
         <h1>Kristen's Quiztacular</h1>
-        <button id="startButton">Start</button>
+        <button class="button" id="startButton">Start</button>
         <br>
-        <button id="resetButton">Reset</button>
+        <button class="button" id="resetButton">Reset</button>
     </header>
     <main>
         <section id ="questionBox">
-            <h2 id="questionDisplay">Question here</h2>
+            <h2 id="questionDisplay">Question</h2>
         </section>
         <section id="flexContainer">
             <div class="answers">
-                <h3 id="answer1">answer</h3>
-            </div>
-            <div class="answers">
-                <h3 id="answer2">answer</h3>
-            </div>
-            <div class="answers">
-                <h3 id="answer3">answer</h3>
-            </div>
-            <div class="answers">
-                <h3 id="answer4">answer</h3>
+                <button class="button">Answer 1</button>
+                <button class="button">Answer 2</button>
+                <button class="button">Answer 3</button>
+                <button class="button">Answer 4</button>
             </div>
         </section>
         <section id="timeBox">
@@ -37,10 +31,10 @@
                 <h2><span id="timeLeft">Timer</span></h2>
             </div>
         </section>
-        <section id="winScore">
+        <section id="results">
             <p>Score:</p>
         </section>
     </main>
-    <script>"./assets/script.js"</script>
+<script src="./assets/script.js"></script>
 </body>
 </html>
