@@ -91,3 +91,6 @@ span#timeLeft {
     margin-top: 20px;
     border-radius: 15px;
 }
+#results p {
+    justify-content: center;
+}

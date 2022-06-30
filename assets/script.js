@@ -11,22 +11,28 @@
 //TODO: Score & initials stored locally
 
 var startBtn = document.querySelector("#startButton");
-var resetBtn = document.querySelector("#resetButton")
-var timeLeftSpan = document.querySelector("#timeLeft");
+var resetBtn = document.querySelector("#resetButton");
+var questionEl = document.querySelector("#questionDisplay");
+var btn1El = document.querySelector("#button1");
+var btn2El = document.querySelector("#button2");
+var btn3El = document.querySelector("#button3");
+var btn4El = document.querySelector("#button4");
+// var timeLeftSpan = document.querySelector("#timeLeft");
 var timerCountdown = document.querySelector("#timeLeft");
-var winSpan = 0;
+var winSpan = document.querySelector("#winSpan");
 var isPlaying = false;
-
-var questionsList = [
+// var wins = local.Storage.getItem("savedWins")||0;
+var currentQuestion = 0
+var questions = [
     {
         question: "Which continent has the shortest coastline?",
-        answers: {
-            a: "Australia",
-            b: "Africa",
-            c: "Europe",
-            d: "Antarctica"
-        },
-        correctAnswer: "b"
+        answers: [
+            "Australia",
+            "Africa",
+            "Europe",
+            "Antarctica"
+        ],
+        correctAnswer: "Africa"
     },
     {
         question: "What is the word for the smell of rain?",
@@ -89,21 +95,49 @@ var questionsList = [
         correctAnswer: "c"
     },
 ];
+console.log(questions[0].answers[1])
 
 //TODO: Start game when Start button is clicked
 startBtn.addEventListener("click", startGame)
 
 function startGame(){
     console.log("started");
-    nextQuestion();
     countdown();
+    questionEl.textContent = questions[0].question;
+    btn1El.textContent = questions[0].answers[0];
+    console.log(btn1El)
+    btn2El.textContent = questions[0].answers[1];
+    btn3El.textContent = questions[0].answers[2];
+    btn4El.textContent = questions[0].answers[3];
+    //user selects answer
+    var userChoice = document.querySelectorAll(".button")
+    console.log(userChoice);
+    //check the answer
+    //logic for if this then run next question
+    nextQuestion();
 }
 
 function nextQuestion(){
+   if (currentQuestion < 6) {
+    currentQuestion++;
+    questionEl.textContent = questions[currentQuestion].question;
+   } else {
+    scoreTabulation();
+   }
 
+    // for (var i = 0; i < questions.length; i++) {
+    //     var question = questions[i].question;
+    //     console.log(question)
+    //     var options = questions[i].choices;
+        // for (var opt in options) {
+        //     for (var radios in userChoices) {
+        //     userChoices[radios].value = options[opt];
+        //     }
+        // }
+    // }
 }
 
-function selectAnswer(){
+function checkAnswer(){
 
 }
 
@@ -128,16 +162,25 @@ function countdown() {
 }
 
 function scoreTabulation() {
-
+    console.log("correct");
+    clearInterval(timer);
+    wins++;
+    winSpan.textContent=wins;
+    localStorage.setItem("savedWins", wins);
 }
 
-resetBtn.addEventListener("click", resetGame)
+resetBtn.addEventListener("click", function() {
+    wins = 0;
+    localStorage.setItem("savedWins",0);
+    winSpan.textContent = 0;
+    location.reload();
+})
 
-function resetGame() {
-    console.log("reset")
-    // Needs to stop timer
-    var timeLeft = 10;
-    // Needs to clear scores
+// function resetGame() {
+//     console.log("reset")
+//     // Needs to stop timer
+//     return;
+//     // Needs to clear scores
 
-}
+// }
 
