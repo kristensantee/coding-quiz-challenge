@@ -29,6 +29,13 @@ main {
     border-radius: 15px;
     font-weight: bold;
 }
+.buttons {
+    background-color: var(--accent);
+    padding: 10px 20px;
+    font-size: 30px;
+    border-radius: 15px;
+    font-weight: bold;
+}
 #startButton {
     font-size: 30px;
     /* padding: 10px, 20px;
@@ -40,7 +47,7 @@ main {
 #questionBox {
     background-color: var(--secondary);
     text-align: center;
-    height: 300px;
+    height: 100px;
     margin: 20px;
     border-radius: 15px;
 }
@@ -62,11 +69,11 @@ h2 {
 }
 .answers {
     width: 90vw;
-    margin: 10px 50px;
+    margin: 10px 30px;
     text-align: center;
 }
 .answers button {
-    margin: 10px 70px;
+    margin: 10px 30px;
     padding: 12px 250px;
 }
 #timeBox {
@@ -92,5 +99,10 @@ span#timeLeft {
     border-radius: 15px;
 }
 #results p {
+    display: flex;
     justify-content: center;
 }
+/* #winSpan {
+    font-size: 100px;
+    justify-content: center;
+} */

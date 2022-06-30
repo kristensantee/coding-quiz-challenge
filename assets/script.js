@@ -17,12 +17,15 @@ var btn1El = document.querySelector("#button1");
 var btn2El = document.querySelector("#button2");
 var btn3El = document.querySelector("#button3");
 var btn4El = document.querySelector("#button4");
+var timeLeft = 100;
 // var timeLeftSpan = document.querySelector("#timeLeft");
 var timerCountdown = document.querySelector("#timeLeft");
 var winSpan = document.querySelector("#winSpan");
 var isPlaying = false;
 // var wins = local.Storage.getItem("savedWins")||0;
-var currentQuestion = 0
+var currentQuestion = 0;
+var buttons = document.querySelector(".answers");
+var answerCheck = document.querySelector("#validCheck");
 var questions = [
     {
         question: "Which continent has the shortest coastline?",
@@ -36,115 +39,116 @@ var questions = [
     },
     {
         question: "What is the word for the smell of rain?",
-        answers: {
-            a: "petrichor",
-            b: "odoragua",
-            c: "mizzle",
-            d: "cumulus aroma"
-        },
-        correctAnswer: "a"
+        answers: [
+            "petrichor",
+            "odoragua",
+            "mizzle",
+            "cumulus aroma"
+        ],
+        correctAnswer: "petrichor"
     },
     {
         question: "Which organization boasts the largest civilian vehicle fleet in the world?",
-        answers: {
-            a: "Maersk",
-            b: "US Postal Service",
-            c: "Amazon",
-            d: "FedEx"
-        },
-        correctAnswer: "b"
+        answers: [
+            "Maersk",
+            "US Postal Service",
+            "Amazon",
+            "FedEx"
+    ],
+        correctAnswer: "US Postal Service"
     },
     {
         question: "Who is Canada's Head of State?",
-        answers: {
-            a: "Justin Trudeau",
-            b: "Justprim Brieber",
-            c: "Florence Machina",
-            d: "Queen Elizabeth II"
-        },
-        correctAnswer: "d"
+        answers: [
+            "Justin Trudeau",
+            "Justprim Brieber",
+            "Florence Machina",
+            "Queen Elizabeth II"
+        ],
+        correctAnswer: "Queen Elizabeth II"
     },
     {
         question: "Which of the following Canadian Junior Hockey teams are fictional?",
-        answers: {
-            a: "Fin Flon Bombers",
-            b: "Waywayseecappo Wolverines",
-            c: "Bonnyville Pontiacs",
-            d: "Tsawwassen Tugboats",
-        },
-        correctAnswer: "d"
+        answers: [
+            "Fin Flon Bombers",
+            "Waywayseecappo Wolverines",
+            "Bonnyville Pontiacs",
+            "Tsawwassen Tugboats",
+        ],
+        correctAnswer: "Tsawwassen Tugboats"
     },
     {
         question: "Which planet in the Solar System is the most dense?",
-        answers: {
-            a: "Venus",
-            b: "Earth",
-            c: "Mars",
-            d: "Jupiter"
-        },
-        correctAnswer: "b"
+        answers: [
+            "Venus",
+            "Earth",
+            "Mars",
+            "Jupiter"
+        ],
+        correctAnswer: "Earth"
     },
     {
         question: "Derived from the Latin word for 'cake,' what is the name of the organ pregant people develop during every pregnancy?",
-        answers: {
-            a: "Axilla",
-            b: "Condyle",
-            c: "Placenta",
-            d: "Glabella"
-        },
-        correctAnswer: "c"
+        answers: [
+            "Axilla",
+            "Condyle",
+            "Placenta",
+            "Glabella"
+        ],
+        correctAnswer: "Placenta"
     },
 ];
-console.log(questions[0].answers[1])
+// console.log(questions[0].answers[1])
 
 //TODO: Start game when Start button is clicked
 startBtn.addEventListener("click", startGame)
 
 function startGame(){
-    console.log("started");
     countdown();
+    if (currentQuestion == 0) {
     questionEl.textContent = questions[0].question;
     btn1El.textContent = questions[0].answers[0];
-    console.log(btn1El)
     btn2El.textContent = questions[0].answers[1];
     btn3El.textContent = questions[0].answers[2];
     btn4El.textContent = questions[0].answers[3];
-    //user selects answer
-    var userChoice = document.querySelectorAll(".button")
-    console.log(userChoice);
-    //check the answer
-    //logic for if this then run next question
-    nextQuestion();
+    }
+}
+
+buttons.addEventListener("click", checkAnswer)
+
+function checkAnswer(e){
+    // console.log(e.target.textContent);
+    if(e.target.textContent === questions[0].correctAnswer){
+        answerCheck.textContent="Correct!";
+        nextQuestion();
+    } else {
+        answerCheck.textContent="Incorrect - 10 seconds off the clock!";
+        timeLeft = (timeLeft - 10);
+        nextQuestion();
+    }
 }
 
 function nextQuestion(){
+    answerCheck.textContent="";
    if (currentQuestion < 6) {
     currentQuestion++;
+    console.log(currentQuestion)
     questionEl.textContent = questions[currentQuestion].question;
+    btn1El.textContent = questions[currentQuestion].answers[0];
+    btn2El.textContent = questions[currentQuestion].answers[1];
+    btn3El.textContent = questions[currentQuestion].answers[2];
+    btn4El.textContent = questions[currentQuestion].answers[3];
+    answerCheck();
    } else {
-    scoreTabulation();
+     endGame();
    }
-
-    // for (var i = 0; i < questions.length; i++) {
-    //     var question = questions[i].question;
-    //     console.log(question)
-    //     var options = questions[i].choices;
-        // for (var opt in options) {
-        //     for (var radios in userChoices) {
-        //     userChoices[radios].value = options[opt];
-        //     }
-        // }
-    // }
 }
 
-function checkAnswer(){
 
-}
 
 //TODO: Timer function counting down
 function countdown() {
-    console.log("timer going")
-    var timeLeft = 10;
+    
     var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
             timerCountdown.textContent = timeLeft + ' seconds remaining';
@@ -155,19 +159,18 @@ function countdown() {
         } else {
             timerCountdown.textContent = "Time's up!";
             clearInterval(timeInterval);
-            console.log("Game over!");
             //TODO: move to function for displaying score
         }
     }, 1000);
 }
 
-function scoreTabulation() {
-    console.log("correct");
-    clearInterval(timer);
-    wins++;
-    winSpan.textContent=wins;
-    localStorage.setItem("savedWins", wins);
-}
+// function scoreTabulation() {
+//     console.log("correct");
+//     // clearInterval(timer);
+//     // wins++;
+//     winSpan.textContent=wins;
+//     localStorage.setItem("savedWins", wins);
+// }
 
 resetBtn.addEventListener("click", function() {
     wins = 0;
@@ -176,11 +179,7 @@ resetBtn.addEventListener("click", function() {
     location.reload();
 })
 
-// function resetGame() {
-//     console.log("reset")
-//     // Needs to stop timer
-//     return;
-//     // Needs to clear scores
-
-// }
+function endGame() {
+    console.log("endGame")
+}
 
