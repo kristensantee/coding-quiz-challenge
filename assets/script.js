@@ -1,15 +1,4 @@
-    //TODO: edgecase: user clicks start while game is running
-//TODO: Corresponding question one answer options display
-//TODO: When answered correctly, move on to next question
-    //TODO: alert/push that answer was correct
-    //TODO: Add a point to the scoreboard
-//TODO: When answered incorrectly, move on to next question
-    //TODO: alert/push that answer was incorrect
-    //TODO: Time subtracted from running time
-//TODO: When time is up or all questions answered, game is over, user enters initials
-//TODO: Option to try game again or clear high scores
-//TODO: Score & initials stored locally
-
+// Global variables to identify locations on html for dynamic performance and fixed variables for the timer, scorekeeping, and moving through the questions array objects
 var startBtn = document.querySelector("#startButton");
 var resetBtn = document.querySelector("#resetButton");
 var questionEl = document.querySelector("#questionDisplay");
@@ -18,12 +7,10 @@ var btn2El = document.querySelector("#button2");
 var btn3El = document.querySelector("#button3");
 var btn4El = document.querySelector("#button4");
 var timeLeft = 100;
-// var timeLeftSpan = document.querySelector("#timeLeft");
 var timerCountdown = document.querySelector("#timeLeft");
 var winSpan = document.querySelector("#winSpan");
-var isPlaying = false;
-// var wins = local.Storage.getItem("savedWins")||0;
 var currentQuestion = 0;
+var scoreUp = 0;
 var buttons = document.querySelector(".answers");
 var answerCheck = document.querySelector("#validCheck");
 var questions = [
@@ -98,11 +85,8 @@ var questions = [
         correctAnswer: "Placenta"
     },
 ];
-// console.log(questions[0].answers[1])
-
-//TODO: Start game when Start button is clicked
+// Start the quiz with the start button here
 startBtn.addEventListener("click", startGame)
-
 function startGame(){
     countdown();
     if (currentQuestion == 0) {
@@ -112,74 +96,68 @@ function startGame(){
     btn3El.textContent = questions[0].answers[2];
     btn4El.textContent = questions[0].answers[3];
     }
+    localStorage.getItem("score");
 }
 
-buttons.addEventListener("click", checkAnswer)
+// Timer function counting down
+function countdown() {
+    var timeInterval = setInterval(function() {
+        timeLeft--;
+        timerCountdown.textContent = timeLeft + ' seconds remaining';
+        if(timeLeft > 1) {
+            if(currentQuestion > 7 && timeLeft > 0) {
+                clearInterval(timeInterval);
+                endGame();
+            }
+        } else {
+            timerCountdown.textContent = "Time's up!";
+            clearInterval(timeInterval);
+            endGame();
+        }
+    }, 1000);
+}
 
-function checkAnswer(e){
-    // console.log(e.target.textContent);
-    if(e.target.textContent === questions[0].correctAnswer){
-        answerCheck.textContent="Correct!";
-        nextQuestion();
+// eventListener for user's answer choice. Logic includes grading validity of choice to increase score and incorrect answer deducting 10 seconds from countdown timer.
+buttons.addEventListener("click", nextQuestion)
+function nextQuestion(event){
+    if(event.target.textContent===questions[currentQuestion].correctAnswer){
+        console.log(questions[currentQuestion].correctAnswer);
+        scoreUp++;
+        winSpan.textContent = scoreUp
     } else {
-        answerCheck.textContent="Incorrect - 10 seconds off the clock!";
         timeLeft = (timeLeft - 10);
-        nextQuestion();
     }
-}
 
-function nextQuestion(){
-    answerCheck.textContent="";
    if (currentQuestion < 6) {
     currentQuestion++;
-    console.log(currentQuestion)
+    answerCheck.textContent="";
     questionEl.textContent = questions[currentQuestion].question;
     btn1El.textContent = questions[currentQuestion].answers[0];
     btn2El.textContent = questions[currentQuestion].answers[1];
     btn3El.textContent = questions[currentQuestion].answers[2];
     btn4El.textContent = questions[currentQuestion].answers[3];
-    answerCheck();
-   } else {
-     endGame();
-   }
+    return;
+    } else {
+        endGame();
+    }
 }
 
-
-
-//TODO: Timer function counting down
-function countdown() {
-    
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-            timerCountdown.textContent = timeLeft + ' seconds remaining';
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timerCountdown.textContent = timeLeft + ' second remaining';
-            timeLeft--;
-        } else {
-            timerCountdown.textContent = "Time's up!";
-            clearInterval(timeInterval);
-            //TODO: move to function for displaying score
-        }
-    }, 1000);
-}
-
-// function scoreTabulation() {
-//     console.log("correct");
-//     // clearInterval(timer);
-//     // wins++;
-//     winSpan.textContent=wins;
-//     localStorage.setItem("savedWins", wins);
-// }
-
+// Resets page to reload position
 resetBtn.addEventListener("click", function() {
     wins = 0;
-    localStorage.setItem("savedWins",0);
-    winSpan.textContent = 0;
     location.reload();
 })
 
+// endGame function clears some elements from the display and prompts user to provide initials to be stored in localStorage with quiz score
 function endGame() {
-    console.log("endGame")
+    var initials = prompt("Please type your initials below to save your score!");
+    questionEl.textContent = "High score for " + initials + " is: " + scoreUp;
+    questionEl.setAttribute("style", "font-size:70px");
+    answerCheck.textContent = "Great job!"
+    startBtn.style.display = "none";
+    buttons.style.display = "none";
+    document.getElementById("timeLeft").style.display = "none";
+    document.getElementById("results").style.display = "none";
+    localStorage.setItem("score", scoreUp);
+    localStorage.setItem("initials", initials);
 }
-

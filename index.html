@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiztacular</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -18,23 +18,23 @@
         <section id ="questionBox">
             <h2 id="questionDisplay">Question</h2>
         </section>
-        <section id="flexContainer">
+        <section class="hide" id="flexContainer">
             <div class="answers">
                 <button class="buttons" id = "button1">Answer 1</button>
                 <button class="buttons" id = "button2">Answer 2</button>
                 <button class="buttons" id = "button3">Answer 3</button>
                 <button class="buttons" id = "button4">Answer 4</button>
-                <h2 id = "validCheck"></h2>
             </div>
         </section>
-        <section id="timeBox">
+        <section class="hide" id="timeBox">
             <div>
-                <h2><span id="timeLeft">Timer</span></h2>
+                <h2><span id="timeLeft">Incorrect guesses = 10 seconds off the clock</span></h2>
+                <h3 id = "validCheck">Get ready! Click Start to begin.</h3>    
             </div>
         </section>
-        <!-- <section id="results">
+        <section class="hide" id="results">
             <p>Score:<span id="winSpan">0</span> </p>
-        </section> -->
+        </section>
     </main>
 <script src="./assets/script.js"></script>
 </body>

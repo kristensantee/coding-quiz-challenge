@@ -36,6 +36,10 @@ main {
     border-radius: 15px;
     font-weight: bold;
 }
+button:hover{
+    background-color: var(--accent);
+    box-shadow: inset 0px 0px 8px var(--font), 0 0 15px var(--font);
+}
 #startButton {
     font-size: 30px;
     /* padding: 10px, 20px;
@@ -55,7 +59,8 @@ h2 {
     color: var(--font);
     font-size: 36px;
     justify-content: center;
-    text-align: center
+    text-align: center;
+    padding-top: 10px;
 }
 #flexContainer {
     background-color: var(--secondary);
@@ -68,18 +73,22 @@ h2 {
     padding: 10px;
 }
 .answers {
-    width: 90vw;
+    width: 70vw;
     margin: 10px 30px;
     text-align: center;
+    justify-content: space-around;
 }
 .answers button {
     margin: 10px 30px;
-    padding: 12px 250px;
+    padding: 12px 10px;
+    width: 40%;
+    height: 115px;
 }
 #timeBox {
     border: 2px solid var(--font);
     margin: auto;
-    width: 800px;
+    width: 1500px;
+    height: 200px;
     padding: 30px;
     border-radius: 15px;
 }
@@ -98,11 +107,25 @@ span#timeLeft {
     margin-top: 20px;
     border-radius: 15px;
 }
+#validCheck {
+    background-color: var(--primary);
+    color: var(--secondary);
+    font-size: 50px;
+    width: 1300px;
+    height: 100px;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
 #results p {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
-/* #winSpan {
-    font-size: 100px;
-    justify-content: center;
+#winSpan {
+    font-size: 80px;
+    align-items: center;
+}
+/* .hide {
+    display: none;
 } */
